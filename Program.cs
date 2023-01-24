@@ -1,39 +1,45 @@
-﻿List<String> list = new List<String>();
-list.Add(Console.ReadLine());
-list.Add("world");
-list.Add("!");
-Console.WriteLine(list[0]);
+﻿// Ввести размер массива
 
+int CorrectNumber(string message)
+{
+    bool isCorrect = false;
+    int result = 0;
+    while(! isCorrect)
+    {
+        Console.Write(message);
+        if (int.TryParse(Console.ReadLine(), out result)) isCorrect = true;
+        else Console.WriteLine("Enter correct number");
+    }
+    return result;
+}
 
-// Ввести размер массива
+// Получить массив из случайных чисел
 
-// int CorrectNumber(string message)
-// {
-//     bool isCorrect = false;
-//     int result = 0;
-//     while(! isCorrect)
-//     {
-//         Console.Write(message);
-//         if (int.TryParse(Console.ReadLine(), out result)) isCorrect = true;
-//         else Console.WriteLine("Enter correct number");
-//     }
-//     return result;
-// }
+String[] InitArray(int num)
+{
+    string[] list = new string[num];
+    for (int i = 0; i < num; i++)
+    {
+        Console.Write($"Введите {i+1}-й элемент массива -> ");
+        list[i] = Console.ReadLine();
+        // Console.WriteLine(list[i]);
+    }
+    // Console.Write("]");
+    return list;
+}
 
-// // Получить массив из случайных чисел
+// Печать массива
 
-// Array[] InitArray(int num)
-// {
-//     List<String> list = new List<String>();
-//     Console.Write("[");
-//     for (int i = 0; i < num; i++)
-//     {
-//         list.Add(Console.ReadLine());
-//     }
-//     Console.Write("]");
-//     return list;
-// }
+void PrintArray(string[] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + (i < array.Length-1 ?", ":""));
+    }
+    Console.Write("]");
+}    
 
-
-// int num = CorrectNumber("Enter a number -> ");
-// Array[] array = InitArray(num);
+int num = CorrectNumber("Введите длинну строкового массива не больше 10 -> ");
+string[] array = InitArray(num);
+PrintArray(array);
