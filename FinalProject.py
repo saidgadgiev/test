@@ -14,8 +14,10 @@ def Add_Array(num):
     return array
 
 
+
 num_rand = random.randint(3,10)
-# Add_Array()
+
+
 list = Add_Array(num_rand)
 print(list)
 print("*"*20)

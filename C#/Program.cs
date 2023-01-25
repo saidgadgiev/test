@@ -35,11 +35,28 @@ void PrintArray(string[] array)
     Console.Write("[");
     for (int i = 0; i < array.Length; i++)
     {
-        Console.Write(array[i] + (i < array.Length-1 ?", ":""));
+        Console.Write("\""+array[i]+"\"" + (i < array.Length-1 ?", ":""));
     }
     Console.Write("]");
 }    
 
+//  Создание случайного  массива из сущ массива
+void FinalArray(string[] array)
+{
+    Random rnd = new Random();
+    int number = rnd.Next(0,4);
+    string[] list = new string[number];
+    Console.Write("[");
+    for (int i = 0; i < number; i++)
+    {
+        int num = rnd.Next(0,array.Length);
+        Console.Write("\""+array[num]+"\"" + (i < number-1 ?", ":""));
+    }
+    Console.Write("]");
+}
 int num = CorrectNumber("Введите длинну строкового массива не больше 10 -> ");
 string[] array = InitArray(num);
 PrintArray(array);
+Console.Write(" -> ");
+FinalArray(array);
+
