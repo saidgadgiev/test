@@ -1,19 +1,17 @@
-﻿// Ввести размер массива
+/*
+Задача: 
+Написать программу, которая из имеющегося массива строк формирует массив из строк, 
+длина которых меньше либо равна 3 символам. Первоначальный массив можно ввести с клавиатуры, 
+либо задать на старте выполнения алгоритма. При решении не рекомендуется пользоваться коллекциями, 
+лучше обойтись исключительно массивами.
+Примеры:
+    ["hello", "2", "world", ":-)"] -> ["2", ":-)"]
+    ["1234", "1567", "-2", "computer science"] -> ["-2"]
+    ["Russia", "Denmark", "Kazan"] -> []
+*/
 
-int CorrectNumber(string message)
-{
-    bool isCorrect = false;
-    int result = 0;
-    while(! isCorrect)
-    {
-        Console.Write(message);
-        if (int.TryParse(Console.ReadLine(), out result)) isCorrect = true;
-        else Console.WriteLine("Enter correct number");
-    }
-    return result;
-}
 
-// Получить массив из случайных чисел
+// Ввести с клавиатура элементы массива
 
 String[] InitArray(int num)
 {
@@ -21,10 +19,8 @@ String[] InitArray(int num)
     for (int i = 0; i < num; i++)
     {
         Console.Write($"Введите {i+1}-й элемент массива -> ");
-        list[i] = Console.ReadLine();
-        // Console.WriteLine(list[i]);
+        list[i] = Console.ReadLine()??"";
     }
-    // Console.Write("]");
     return list;
 }
 
@@ -40,23 +36,45 @@ void PrintArray(string[] array)
     Console.Write("]");
 }    
 
-//  Создание случайного  массива из сущ массива
-void FinalArray(string[] array)
+// Перебор элементов в массиве и проверка 
+// количества символов в массиве удовлетворяющее условию задачи
+int SimvolArray(string[] array) 
 {
-    Random rnd = new Random();
-    int number = rnd.Next(0,4);
-    string[] list = new string[number];
-    Console.Write("[");
-    for (int i = 0; i < number; i++)
+    int maxElements = 3;
+    int count = 0;
+    for (int i = 0; i < array.Length; i++)
     {
-        int num = rnd.Next(0,array.Length);
-        Console.Write("\""+array[num]+"\"" + (i < number-1 ?", ":""));
+	    if(array[i].Length <= maxElements){
+		    count++;
+	    }   
     }
-    Console.Write("]");
+    return count;
 }
-int num = CorrectNumber("Введите длинну строкового массива не больше 10 -> ");
+//  Создание второго  массива из сущ массива удовлетворяющее условию задачи
+String[] FinalArray(string[] array, int count)
+{
+    string[] arr = new string[count]; // Создает второй пустой массив
+    int maxElements = 3;
+    int j = 0;
+    for (int i = 0; i < array.Length; i++) 
+    {
+        if(array[i].Length <= maxElements) // условиче чтоб кол символов не превышало 3
+        {
+            arr[j] = array[i];
+            j++;
+        }
+    }
+    return arr;
+}
+
+Random rnd = new Random();
+int num = rnd.Next(3,10); // Случайное число для размера массива
+Console.WriteLine($"Длинна массива будет равна {num} эле. ");
 string[] array = InitArray(num);
+
 PrintArray(array);
+int count = SimvolArray(array);
 Console.Write(" -> ");
-FinalArray(array);
+PrintArray(FinalArray(array, count));
+
 
